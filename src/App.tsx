@@ -1,10 +1,22 @@
+import { useState } from 'react';
 import { Linkedin, Mail } from 'lucide-react';
 import profileImage from './assets/profile.jpg';
 
 const PortfolioWebsite = () => {
+  const [darkMode, setDarkMode] = useState(false);
+  const [expandedExperience, setExpandedExperience] = useState<string | null>(null);
+
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+
+  const toggleExperience = (role: string) => {
+    setExpandedExperience((prev) => (prev === role ? null : role));
+  };
+
+  const themeClasses = darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900';
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
+    <div className={`min-h-screen ${themeClasses}`}>
+      {/* Dark Mode Toggle */}
       <header className="bg-emerald-900">
         <nav className="max-w-6xl mx-auto px-4 py-6 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-white">JB.</h1>
@@ -13,16 +25,22 @@ const PortfolioWebsite = () => {
             <a href="#skills" className="text-emerald-100 hover:text-white transition-colors">Skills</a>
             <a href="#projects" className="text-emerald-100 hover:text-white transition-colors">Projects</a>
           </div>
+          <button
+            onClick={toggleDarkMode}
+            className="text-white p-2 rounded-full bg-gray-700 hover:bg-gray-600"
+          >
+            {darkMode ? '🌙' : '🌞'}
+          </button>
         </nav>
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-16">
         <section className="text-center mb-20">
           <div className="mb-8 flex justify-center">
-          <img 
-            src={profileImage}
-            alt="Jayesh Bhojwani" 
-            className="w-48 h-48 rounded-full border-4 border-emerald-600 object-cover"
+            <img 
+              src={profileImage}
+              alt="Jayesh Bhojwani" 
+              className="w-48 h-48 rounded-full border-4 border-emerald-600 object-cover"
             />
           </div>
           <h1 className="text-5xl font-bold text-emerald-900 mb-4">Jayesh Bhojwani</h1>
@@ -41,42 +59,59 @@ const PortfolioWebsite = () => {
           </div>
         </section>
 
+        {/* Experience Section */}
         <section id="experience" className="mb-20">
           <h2 className="text-3xl font-bold text-emerald-900 mb-8">Experience</h2>
-          
           <div className="space-y-12">
+            {/* Software Engineer Associate */}
             <div className="border border-emerald-100 p-6 rounded-lg hover:border-emerald-200 transition-colors">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-emerald-800">Software Engineer Analyst/Associate</h3>
+                  <h3 className="text-xl font-bold text-emerald-800 cursor-pointer"
+                    onClick={() => toggleExperience('associate')}
+                  >
+                    Software Engineer Associate
+                  </h3>
                   <p className="text-emerald-600">Goldman Sachs</p>
                 </div>
-                <p className="text-emerald-600">July 2022 – Present</p>
+                <p className="text-emerald-600">Dec 2023 – Present</p>
               </div>
-              <ul className="space-y-3 text-emerald-700">
-                <li>• Led AWS migration of asset management marketing solution, reducing costs by 30%</li>
-                <li>• Migrated Salesforce ETL pipeline to AWS Glue, cutting operational downtime by 25%</li>
-                <li>• Developed TypeScript AWS CDK library and Python CLI, reducing onboarding code by 80%</li>
-                <li>• Implemented Redis multi-cluster setup achieving 99% reduction in read/write times</li>
-              </ul>
+              {expandedExperience === 'associate' && (
+                <ul className="space-y-3 text-emerald-700">
+                  <li>• Led the migration of the Salesforce ETL pipeline to AWS Glue, reducing operational downtime by 25%, improving scalability, and enabling seamless data flow between systems.</li>
+                  <li>• Spearheaded the development of a custom TypeScript AWS CDK library and a Python CLI tool, reducing onboarding code by 80% and simplifying the process for developers integrating with our services.</li>
+                  <li>• Collaborated closely with cross-functional teams to streamline cloud infrastructure and ensure the security and efficiency of the AWS environment.</li>
+                  <li>• Contributed to optimizing automated workflows, resulting in reduced resource consumption and improved cost-efficiency across various platforms.</li>
+                </ul>
+              )}
             </div>
 
+            {/* Software Engineer Analyst */}
             <div className="border border-emerald-100 p-6 rounded-lg hover:border-emerald-200 transition-colors">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-emerald-800">Analyst Intern</h3>
-                  <p className="text-emerald-600">American Express</p>
+                  <h3 className="text-xl font-bold text-emerald-800 cursor-pointer"
+                    onClick={() => toggleExperience('analyst')}
+                  >
+                    Software Engineer Analyst
+                  </h3>
+                  <p className="text-emerald-600">Goldman Sachs</p>
                 </div>
-                <p className="text-emerald-600">January 2021 – June 2021</p>
+                <p className="text-emerald-600">Jul 2022 – Dec 2023</p>
               </div>
-              <ul className="space-y-3 text-emerald-700">
-                <li>• Built data quality applications reducing errors by 40%</li>
-                <li>• Created internal derivations for third-party data fetching, enhancing security</li>
-              </ul>
+              {expandedExperience === 'analyst' && (
+                <ul className="space-y-3 text-emerald-700">
+                  <li>• Led the successful migration of an asset management marketing solution to AWS, resulting in a 30% reduction in operational costs and a 40% improvement in deployment times.</li>
+                  <li>• Played a key role in implementing a Redis multi-cluster setup, which achieved a 99% reduction in read/write times and contributed to significant performance improvements for our data-intensive applications.</li>
+                  <li>• Collaborated with cross-disciplinary teams to ensure optimal integration of distributed systems, utilizing tools like Kubernetes, Docker, and AWS Lambda for increased flexibility and reliability.</li>
+                  <li>• Implemented robust monitoring and alerting systems, improving proactive incident management and minimizing system downtimes during critical deployments.</li>
+                </ul>
+              )}
             </div>
           </div>
         </section>
 
+        {/* Skills Section */}
         <section id="skills" className="mb-20">
           <h2 className="text-3xl font-bold text-emerald-900 mb-8">Skills</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -99,6 +134,7 @@ const PortfolioWebsite = () => {
           </div>
         </section>
 
+        {/* Projects Section */}
         <section id="projects" className="mb-20">
           <h2 className="text-3xl font-bold text-emerald-900 mb-8">Featured Project</h2>
           <div className="border border-emerald-100 p-6 rounded-lg hover:border-emerald-200 transition-colors">
@@ -112,6 +148,7 @@ const PortfolioWebsite = () => {
           </div>
         </section>
 
+        {/* Achievements Section */}
         <section className="text-center">
           <h2 className="text-3xl font-bold text-emerald-900 mb-8">Achievements</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
