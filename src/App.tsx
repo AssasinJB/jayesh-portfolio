@@ -1,5 +1,4 @@
-import React from 'react';
-import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
+import { Linkedin, Mail } from 'lucide-react';
 
 const PortfolioWebsite = () => {
   return (
