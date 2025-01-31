@@ -18,10 +18,10 @@ const PortfolioWebsite = () => {
       <main className="max-w-6xl mx-auto px-4 py-16">
         <section className="text-center mb-20">
           <div className="mb-8 flex justify-center">
-            <img 
-              src="/assets/profile.jpg" 
-              alt="Jayesh Bhojwani" 
-              className="w-48 h-48 rounded-full border-4 border-emerald-600 object-cover"
+          <img 
+            src="/assets/profile.jpg" 
+            alt="Jayesh Bhojwani" 
+            className="w-48 h-48 rounded-full border-4 border-emerald-600 object-cover"
             />
           </div>
           <h1 className="text-5xl font-bold text-emerald-900 mb-4">Jayesh Bhojwani</h1>
