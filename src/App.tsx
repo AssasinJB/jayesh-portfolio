@@ -19,7 +19,7 @@ const PortfolioWebsite = () => {
         <section className="text-center mb-20">
           <div className="mb-8 flex justify-center">
             <img 
-              src="src/assets/profile.jpg" 
+              src="/assets/profile.jpg" 
               alt="Jayesh Bhojwani" 
               className="w-48 h-48 rounded-full border-4 border-emerald-600 object-cover"
             />
